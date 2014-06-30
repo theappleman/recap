@@ -37,7 +37,7 @@ BASEDIR="/var/log/recap"
 lockdir=/var/lock/recaplog.lock
 LOG_COMPRESS=1
 LOG_EXPIRY=0
-COMPRESS_ITEMS="fdisk mysql netstat ps pstree resources"
+BACKUP_ITEMS="fdisk mysql netstat ps pstree resources"
 ERRORLEVEL=DEBUG
 LOGFILE=${BASEDIR}/recaplog.log
 EMAIL_ON_ERROR=1
@@ -89,7 +89,7 @@ delete_old_logs() {
 # cat tiny log files into daily log files
 pack_old_logs() {
 	YESTERDAYDATE=$(date -d "now -1 day" "+%Y%m%d")
-	for item in $COMPRESS_ITEMS; do
+	for item in $BACKUP_ITEMS; do
 		print_msg DEBUG "packing ${item}..."
 		OUTPUTFILE=${BASEDIR}/${item}_daily_${YESTERDAYDATE}.log
 		#
